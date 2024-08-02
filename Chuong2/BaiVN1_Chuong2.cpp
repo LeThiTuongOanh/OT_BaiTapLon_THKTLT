@@ -43,6 +43,24 @@ void Cau1(int *mang, int n, int x)
 	}
 }
 
+int timSoLanXuatHien(int arr[], int n, int x) {
+	int count = 0;
+	for (int i = 0; i < n; i++) {
+		if (arr[i] == x) {
+			count++;	
+		}
+	}
+	return count;
+}
+
+void Cau3(int arr[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		int x = timSoLanXuatHien(arr, n, arr[i]);
+		printf("So lan xuat hien cua %d la %d\n", arr[i], x);
+	}
+}
 int main()
 {
 	int n;
@@ -92,7 +110,9 @@ int main()
 			scanf_s("%d", &x);
 			Cau1(mang, n, x);
 			break;
-
+		case 4:
+			Cau3(mang, n);
+			break;
 		case 0:
 			printf("Thoat chuong trinh.\n");
 			break;
