@@ -146,6 +146,29 @@ void timPhanTuChuaChuSoX(int *mang, int n, int x) {
 void Cau7(int *mang, int n, int x) {
 	timPhanTuChuaChuSoX(mang, n, x);
 }
+void sapXepLeDauChanCuoi(int *mang, int n) {
+	int left = 0, right = n - 1;
+
+	while (left < right) {
+		while (left < right && mang[left] % 2 != 0) {
+			left++;
+		}
+		while (left < right && mang[right] % 2 == 0) {
+			right--;
+		}
+		if (left < right) {
+			int temp = mang[left];
+			mang[left] = mang[right];
+			mang[right] = temp;
+			left++;
+			right--;
+		}
+	}
+}
+
+void Cau9(int *mang, int n) {
+	sapXepLeDauChanCuoi(mang, n);
+}
 int main()
 {
 	int n;
@@ -206,6 +229,10 @@ int main()
 			printf("Nhap vao gia tri x: ");
 			scanf_s("%d", &x);
 			Cau7(mang, n, x);
+			break;
+		case 10:
+			Cau9(mang, n);
+			inMang(mang, n);
 			break;
 		case 0:
 			printf("Thoat chuong trinh.\n");
