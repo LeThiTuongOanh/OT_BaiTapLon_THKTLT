@@ -61,6 +61,64 @@ void Cau3(int arr[], int n)
 		printf("So lan xuat hien cua %d la %d\n", arr[i], x);
 	}
 }
+
+void timDayConGiamDaiNhat(int *a, int n) {
+	int *lds = (int *)malloc(n * sizeof(int));
+	int *parent = (int *)malloc(n * sizeof(int));
+	int maxLength = 0;
+	int endIndex = 0;
+
+	// Khởi tạo tất cả các giá trị trong lds bằng 1 và parent bằng -1
+	for (int i = 0; i < n; i++) {
+		lds[i] = 1;
+		parent[i] = -1;
+	}
+
+	// Tính giá trị lds và cập nhật parent
+	for (int i = 1; i < n; i++) {
+		for (int j = 0; j < i; j++) {
+			if (a[i] < a[j] && lds[i] < lds[j] + 1) {
+				lds[i] = lds[j] + 1;
+				parent[i] = j;
+			}
+		}
+	}
+
+	// Tìm giá trị lớn nhất trong lds và chỉ số kết thúc của dãy con
+	for (int i = 0; i < n; i++) {
+		if (maxLength < lds[i]) {
+			maxLength = lds[i];
+			endIndex = i;
+		}
+	}
+
+	// In độ dài của dãy con giảm dài nhất
+	printf("Do dai day con giam dai nhat la: %d\n", maxLength);
+
+	// In dãy con giảm dài nhất
+	int *sequence = (int *)malloc(maxLength * sizeof(int));
+	int index = maxLength - 1;
+	while (endIndex != -1) {
+		sequence[index--] = a[endIndex];
+		endIndex = parent[endIndex];
+	}
+
+	printf("Day con giam dai nhat la: ");
+	for (int i = 0; i < maxLength; i++) {
+		printf("%d ", sequence[i]);
+	}
+	printf("\n");
+
+	// Giải phóng bộ nhớ
+	free(lds);
+	free(parent);
+	free(sequence);
+}
+
+
+void Cau5(int *mang, int n) {
+	timDayConGiamDaiNhat(mang, n);
+}
 int main()
 {
 	int n;
@@ -112,6 +170,9 @@ int main()
 			break;
 		case 4:
 			Cau3(mang, n);
+			break;
+		case 6:
+			Cau5(mang, n);
 			break;
 		case 0:
 			printf("Thoat chuong trinh.\n");
