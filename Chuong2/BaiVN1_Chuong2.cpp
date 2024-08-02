@@ -119,6 +119,33 @@ void timDayConGiamDaiNhat(int *a, int n) {
 void Cau5(int *mang, int n) {
 	timDayConGiamDaiNhat(mang, n);
 }
+bool chuaChuSo(int num, int x) {
+	bool foundFirstDigit = false, foundSecondDigit = false;
+	int firstDigit = x / 10;
+	int secondDigit = x % 10;
+
+	while (num > 0) {
+		int digit = num % 10;
+		if (digit == firstDigit) foundFirstDigit = true;
+		if (digit == secondDigit) foundSecondDigit = true;
+		num /= 10;
+	}
+
+	return foundFirstDigit && foundSecondDigit;
+}
+void timPhanTuChuaChuSoX(int *mang, int n, int x) {
+	printf("Cac phan tu co chua chu so cua %d: ", x);
+	for (int i = 0; i < n; i++) {
+		if (chuaChuSo(mang[i], x)) {
+			printf("%d ", mang[i]);
+		}
+	}
+	printf("\n");
+}
+
+void Cau7(int *mang, int n, int x) {
+	timPhanTuChuaChuSoX(mang, n, x);
+}
 int main()
 {
 	int n;
@@ -173,6 +200,12 @@ int main()
 			break;
 		case 6:
 			Cau5(mang, n);
+			break;
+		case 8:
+			int x;
+			printf("Nhap vao gia tri x: ");
+			scanf_s("%d", &x);
+			Cau7(mang, n, x);
 			break;
 		case 0:
 			printf("Thoat chuong trinh.\n");
