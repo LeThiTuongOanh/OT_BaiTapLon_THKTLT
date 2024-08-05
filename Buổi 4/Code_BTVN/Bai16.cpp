@@ -20,6 +20,14 @@ int tinh_Yn_khu_dequy(int n) {
     return Yn;
 }
 
+int tinh_Yn_dequy_long(int n) {
+    if (n == 1) return 1;
+    if (n == 2) return 2;
+    if (n == 3) return 3;
+    return tinh_Yn_dequy_long(n - 1) + 2 * tinh_Yn_dequy_long(n - 2) + 3 * tinh_Yn_dequy_long(n - 3);
+}
+
+
 void menu() {
     int lua_chon, n;
     printf("Voi moi n >= 1, so Y_n duoc tinh nhu sau : Y1 = 1, Y2 = 2, Y3 = 3, Y_n = Y_(n - 1) + 2 * Y_(n - 2) + 3 * Y_(n - 3) neu n >= 4");
@@ -44,6 +52,18 @@ void menu() {
                 printf("Gia tri phan tu thu %d cua day so Y la: %d \n", n, gia_tri);
             }
             break;
+        case 2:
+            printf("Nhap gia tri cua n (n >= 1): ");
+            scanf_s("%d", &n);
+            if (n < 1) {
+                printf("n phai la so nguyen duong .\n");
+            }
+            else {
+                int gia_tri = tinh_Yn_dequy_long(n);
+                printf("Gia tri phan tu thu %d cua day so Y la: %d \n", n, gia_tri);
+            }
+            break;
+
         case 3:
             printf("Thoat chuong trinh.\n");
             return;
