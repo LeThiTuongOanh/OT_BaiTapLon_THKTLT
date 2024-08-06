@@ -16,6 +16,7 @@ void rutGonPhanSo(PhanSo* ps);
 PhanSo tichPhanSo(PhanSo* arr, int n);
 PhanSo timPhanSoLonNhat(PhanSo* arr, int n);
 PhanSo timPhanSoNhoNhat(PhanSo* arr, int n);
+void xoaPhanSoTaiViTri(PhanSo* arr, int* n, int k);
 
 
 int UCLN(int a, int b);
@@ -100,6 +101,19 @@ int main() {
             if (arr != NULL) {
                 PhanSo min = timPhanSoNhoNhat(arr, n);
                 printf("Phan so nho nhat: %d/%d\n", min.tu, min.mau);
+            }
+            else {
+                printf("Mang phan so rong!\n");
+            }
+            break;
+        case 9:
+            if (arr != NULL) {
+                int k;
+                printf("Nhap vi tri can xoa: ");
+                scanf_s("%d", &k);
+                xoaPhanSoTaiViTri(arr, &n, k);
+                printf("Mang phan so sau khi xoa:\n");
+                xuatMangPhanSo(arr, n);
             }
             else {
                 printf("Mang phan so rong!\n");
@@ -208,3 +222,11 @@ PhanSo timPhanSoNhoNhat(PhanSo* arr, int n) {
     return min;
 }
 
+void xoaPhanSoTaiViTri(PhanSo* arr, int* n, int k) {
+    if (k >= 0 && k < *n) {
+        for (int i = k; i < *n - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        (*n)--;
+    }
+}
