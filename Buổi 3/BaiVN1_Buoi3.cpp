@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -41,6 +41,7 @@ void xuatCacCotSoLe(int m, int n, int maTran[][MAX]) {
 	}
 }
 
+/*
 
 int demChuSo2(int x) {
 	int count = 0;
@@ -51,6 +52,7 @@ int demChuSo2(int x) {
 	return count;
 }
 
+
 int demPhanTuCoChuSo2(int m, int n, int maTran[][MAX]) {
 	int count = 0;
 	for (int i = 0; i < m; i++) {
@@ -60,8 +62,54 @@ int demPhanTuCoChuSo2(int m, int n, int maTran[][MAX]) {
 	}
 	return count;
 }
+*/
 
+void sapXepDongTangLeGiamChan(int n, int dong[]) {
+	int le[MAX], chan[MAX];
+	int leCount = 0, chanCount = 0;
+	for (int j = 0; j < n; j++) {
+		if (dong[j] % 2 == 0) {
+			chan[chanCount++] = dong[j];
+		}
+		else {
+			le[leCount++] = dong[j];
+		}
+	}
+	// Sắp xếp số lẻ tăng dần
+	for (int i = 0; i < leCount - 1; i++) {
+		for (int j = i + 1; j < leCount; j++) {
+			if (le[i] > le[j]) {
+				int temp = le[i];
+				le[i] = le[j];
+				le[j] = temp;
+			}
+		}
+	}
+	// Sắp xếp số chẵn giảm dần
+	for (int i = 0; i < chanCount - 1; i++) {
+		for (int j = i + 1; j < chanCount; j++) {
+			if (chan[i] < chan[j]) {
+				int temp = chan[i];
+				chan[i] = chan[j];
+				chan[j] = temp;
+			}
+		}
+	}
+	// Gộp lại mảng
+	int index = 0;
+	for (int i = 0; i < leCount; i++) {
+		dong[index++] = le[i];
+	}
+	for (int i = 0; i < chanCount; i++) {
+		dong[index++] = chan[i];
+	}
+}
 
+void sapXepMaTranDongTangLeGiamChan(int m, int n, int maTran[][MAX]) {
+	for (int i = 0; i < m; i++) {
+		sapXepDongTangLeGiamChan(n, maTran[i]);
+	}
+}
 int main() {
 	int m, n, k = 100;
 	int maTran[MAX][MAX];
@@ -101,7 +149,12 @@ int main() {
 			xuatCacCotSoLe(m, n, maTran);
 			break;
 		case 3:
-			printf("So phan tu co chu so 2: %d\n", demPhanTuCoChuSo2(m, n, maTran));
+			//printf("So phan tu co chu so 2: %d\n", demPhanTuCoChuSo2(m, n, maTran));
+			break;
+		case 5:
+			sapXepMaTranDongTangLeGiamChan(m, n, maTran);
+			printf("Ma tran sau khi sap xep dong tang le, giam chan:\n");
+			xuatMaTran(m, n, maTran);
 			break;
 		case 0:
 			printf("Thoat.\n");
