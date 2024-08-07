@@ -44,6 +44,24 @@ void xoaPhanTuTaiViTri(int *a, int *n, int k) {
 	(*n)--;
 }
 
+void themPhanTuTaiViTri(int **a, int *n, int x, int k) {
+	if (k < 0 || k > *n) {
+		printf("Vi tri khong hop le.\n");
+		return;
+	}
+	*a = (int *)realloc(*a, (*n + 1) * sizeof(int));
+	if (*a == NULL) {
+		printf("Memory reallocation failed.\n");
+		exit(1);
+	}
+	for (int i = *n; i > k; i--) {
+		(*a)[i] = (*a)[i - 1];
+	}
+	(*a)[k] = x;
+	(*n)++;
+}
+
+
 int main() {
 	int *a, n = 0;	
 	nhapM1C_SoNguyen(&a, &n);
@@ -56,6 +74,13 @@ int main() {
 	int k = 3;
 	printf("\nXoa phan tu tai vi tri %d:\n", k);
 	xoaPhanTuTaiViTri(a, &n, k);
+	xuatM1C_SoNguyen(a, n);
+
+
+	int x = 99;
+	k = 2;
+	printf("\nThem phan tu %d tai vi tri %d:\n", x, k);
+	themPhanTuTaiViTri(&a, &n, x, k);
 	xuatM1C_SoNguyen(a, n);
 
 	free(a);
