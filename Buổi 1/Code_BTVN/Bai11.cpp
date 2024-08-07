@@ -80,6 +80,15 @@ void chuyenChanLenDauLeXuongCuoi(int *a, int n) {
 	}
 }
 
+int kiemTraChanLeXenKe(int *a, int n) {
+	for (int i = 0; i < n - 1; i++) {
+		if ((a[i] % 2 == 0 && a[i + 1] % 2 == 0) || (a[i] % 2 != 0 && a[i + 1] % 2 != 0)) {
+			return 0;
+		}
+	}
+	return 1;
+}
+
 int main() {
 	int *a, n = 0;	
 	nhapM1C_SoNguyen(&a, &n);
@@ -105,6 +114,14 @@ int main() {
 	printf("\nChuyen so chan len dau, le xuong cuoi:\n");
 	chuyenChanLenDauLeXuongCuoi(a, n);
 	xuatM1C_SoNguyen(a, n);
+
+	if (kiemTraChanLeXenKe(a, n)) {
+		printf("\nMang co chua chan le xen ke.\n");
+	}
+	else {
+		printf("\nMang khong chua chan le xen ke.\n");
+	}
+
 
 
 	free(a);
