@@ -15,6 +15,15 @@ double TinhS1_KhongDeQuy(int n) {
 	return tong;
 }
 
+
+int TinhS2_DeQuy(int n) {
+	if (n == 1) {
+		return 1;
+	}
+	return n * n + TinhS2_DeQuy(n - 1);
+}
+
+
 int main() {
 	int n;
 	printf("Nhap so nguyen duong n: ");
@@ -26,6 +35,8 @@ int main() {
 	printf("S1(n) de quy: %.10lf\n", S1_dequy);
 	printf("S1(n) khong de quy: %.10lf\n", S1_khongdequy);
 
+	int S2_dequy = TinhS2_DeQuy(n);
+	printf("S2(n) de quy: %d\n", S2_dequy);
 	getchar();
 	getchar();
 	return 0;
