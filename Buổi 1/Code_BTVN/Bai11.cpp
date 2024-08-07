@@ -33,13 +33,31 @@ void xuatCucTieu(int *a, int n) {
 	}
 }
 
+void xoaPhanTuTaiViTri(int *a, int *n, int k) {
+	if (k < 0 || k >= *n) {
+		printf("Vi tri khong hop le.\n");
+		return;
+	}
+	for (int i = k; i < *n - 1; i++) {
+		a[i] = a[i + 1];
+	}
+	(*n)--;
+}
+
 int main() {
-	int *a, n = 0;
+	int *a, n = 0;	
 	nhapM1C_SoNguyen(&a, &n);
 	xuatM1C_SoNguyen(a, n);
 
 	printf("\nCac so cuc tieu trong mang:\n");
 	xuatCucTieu(a, n);
+
+
+	int k = 3;
+	printf("\nXoa phan tu tai vi tri %d:\n", k);
+	xoaPhanTuTaiViTri(a, &n, k);
+	xuatM1C_SoNguyen(a, n);
+
 	free(a);
 	getchar();
 	getchar();
