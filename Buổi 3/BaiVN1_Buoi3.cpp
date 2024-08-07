@@ -41,6 +41,27 @@ void xuatCacCotSoLe(int m, int n, int maTran[][MAX]) {
 	}
 }
 
+
+int demChuSo2(int x) {
+	int count = 0;
+	while (x > 0) {
+		if (x % 10 == 2) count++;
+		x /= 10;
+	}
+	return count;
+}
+
+int demPhanTuCoChuSo2(int m, int n, int maTran[][MAX]) {
+	int count = 0;
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (demChuSo2(maTran[i][j]) > 0) count++;
+		}
+	}
+	return count;
+}
+
+
 int main() {
 	int m, n, k = 100;
 	int maTran[MAX][MAX];
@@ -79,7 +100,9 @@ int main() {
 		case 1:
 			xuatCacCotSoLe(m, n, maTran);
 			break;
-		
+		case 3:
+			printf("So phan tu co chu so 2: %d\n", demPhanTuCoChuSo2(m, n, maTran));
+			break;
 		case 0:
 			printf("Thoat.\n");
 			break;
