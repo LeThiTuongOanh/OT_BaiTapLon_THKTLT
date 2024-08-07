@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-void taoMangNgauNhien(int *mang, int n, int tu, int den) {
+void taoMangNgauNhien(int* mang, int n, int tu, int den) {
 	for (int i = 0; i < n; i++) {
 		mang[i] = tu + rand() % (den - tu + 1);
 	}
@@ -10,7 +10,7 @@ void taoMangNgauNhien(int *mang, int n, int tu, int den) {
 
 
 // Hàm in mảng
-void inMang(int *mang, int n) {
+void inMang(int* mang, int n) {
 	for (int i = 0; i < n; i++) {
 		printf("%d ", mang[i]);
 	}
@@ -29,29 +29,50 @@ bool kiemTraSoNguyenTo(int num) {
 	return true;
 }
 
-void Cau1(int *mang, int n, int x)
+void Cau1(int* mang, int n, int x)
 {
 	printf("Phan tu so nguyen to: ");
 	for (int i = 0; i < n; i++)
 	{
 		if (kiemTraSoNguyenTo(mang[i]))
 		{
-			if (mang[i]<x)
+			if (mang[i] < x)
 				printf("%d ", mang[i]);
 		}
 
 	}
 }
 
+int chuSoDauTien(int so) {
+	while (so >= 10) {
+		so /= 10;
+	}
+	return so;
+}
+
+int Cau2(int* mang, int n) {
+	int tong = 0;
+	for (int i = 0; i < n; i++) {
+		int x = mang[i];
+		int chuSoDau = chuSoDauTien(x);
+		if (chuSoDau % 2 != 0) { 
+			tong += x;
+		}
+	}
+	return tong;
+}
+
+
 int timSoLanXuatHien(int arr[], int n, int x) {
 	int count = 0;
 	for (int i = 0; i < n; i++) {
 		if (arr[i] == x) {
-			count++;	
+			count++;
 		}
 	}
 	return count;
 }
+
 
 void Cau3(int arr[], int n)
 {
@@ -62,9 +83,9 @@ void Cau3(int arr[], int n)
 	}
 }
 
-void timDayConGiamDaiNhat(int *a, int n) {
-	int *lds = (int *)malloc(n * sizeof(int));
-	int *parent = (int *)malloc(n * sizeof(int));
+void timDayConGiamDaiNhat(int* a, int n) {
+	int* lds = (int*)malloc(n * sizeof(int));
+	int* parent = (int*)malloc(n * sizeof(int));
 	int maxLength = 0;
 	int endIndex = 0;
 
@@ -96,7 +117,7 @@ void timDayConGiamDaiNhat(int *a, int n) {
 	printf("Do dai day con giam dai nhat la: %d\n", maxLength);
 
 	// In dãy con giảm dài nhất
-	int *sequence = (int *)malloc(maxLength * sizeof(int));
+	int* sequence = (int*)malloc(maxLength * sizeof(int));
 	int index = maxLength - 1;
 	while (endIndex != -1) {
 		sequence[index--] = a[endIndex];
@@ -116,7 +137,7 @@ void timDayConGiamDaiNhat(int *a, int n) {
 }
 
 
-void Cau5(int *mang, int n) {
+void Cau5(int* mang, int n) {
 	timDayConGiamDaiNhat(mang, n);
 }
 bool chuaChuSo(int num, int x) {
@@ -133,7 +154,7 @@ bool chuaChuSo(int num, int x) {
 
 	return foundFirstDigit && foundSecondDigit;
 }
-void timPhanTuChuaChuSoX(int *mang, int n, int x) {
+void timPhanTuChuaChuSoX(int* mang, int n, int x) {
 	printf("Cac phan tu co chua chu so cua %d: ", x);
 	for (int i = 0; i < n; i++) {
 		if (chuaChuSo(mang[i], x)) {
@@ -143,10 +164,10 @@ void timPhanTuChuaChuSoX(int *mang, int n, int x) {
 	printf("\n");
 }
 
-void Cau7(int *mang, int n, int x) {
+void Cau7(int* mang, int n, int x) {
 	timPhanTuChuaChuSoX(mang, n, x);
 }
-void sapXepLeDauChanCuoi(int *mang, int n) {
+void sapXepLeDauChanCuoi(int* mang, int n) {
 	int left = 0, right = n - 1;
 
 	while (left < right) {
@@ -166,13 +187,13 @@ void sapXepLeDauChanCuoi(int *mang, int n) {
 	}
 }
 
-void Cau9(int *mang, int n) {
+void Cau9(int* mang, int n) {
 	sapXepLeDauChanCuoi(mang, n);
 }
 int main()
 {
 	int n;
-	int *mang = NULL;
+	int* mang = NULL;
 	int tu = 0, den = 100;
 	int luaChon, x, viTri;
 
@@ -186,7 +207,7 @@ int main()
 	} while (n < 15);
 
 	// Cấp phát bộ nhớ cho mảng
-	mang = (int *)malloc(n * sizeof(int));
+	mang = (int*)malloc(n * sizeof(int));
 	if (mang == NULL) {
 		printf("Khong the cap phat bo nho!\n");
 		return 1; // Kết thúc chương trình nếu không thể cấp phát bộ nhớ
@@ -217,6 +238,13 @@ int main()
 			printf("Nhap vao so ngguyen x: ");
 			scanf_s("%d", &x);
 			Cau1(mang, n, x);
+			break;
+
+		case 3: {
+			int tong = Cau2(mang, n);
+			printf("Tong cac phan tu co chu so dau la chu so le: %d\n", tong);
+			break;
+		}
 			break;
 		case 4:
 			Cau3(mang, n);
