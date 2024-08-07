@@ -125,6 +125,28 @@ int kiemTraGiamDanDongCot(int m, int n, int maTran[][MAX]) {
 	return 1;
 }
 
+
+void lietKeDongGiamDan(int m, int n, int maTran[][MAX]) {
+	printf("Cac dong co gia tri giam dan:\n");
+	for (int i = 0; i < m; i++) {
+		int giamDan = 1;
+		for (int j = 1; j < n; j++) {
+			if (maTran[i][j] > maTran[i][j - 1]) {
+				giamDan = 0;
+				break;
+			}
+		}
+		if (giamDan) {
+			printf("Dong %d: ", i + 1);
+			for (int j = 0; j < n; j++) {
+				printf("%d ", maTran[i][j]);
+			}
+			printf("\n");
+		}
+	}
+}
+
+
 int main() {
 	int m, n, k = 100;
 	int maTran[MAX][MAX];
@@ -178,6 +200,9 @@ int main() {
 			else {
 				printf("Ma tran khong co gia tri giam dan theo dong va cot.\n");
 			}
+			break;
+		case 9:
+			lietKeDongGiamDan(m, n, maTran);
 			break;
 		case 0:
 			printf("Thoat.\n");
