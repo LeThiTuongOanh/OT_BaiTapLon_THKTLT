@@ -110,6 +110,21 @@ void sapXepMaTranDongTangLeGiamChan(int m, int n, int maTran[][MAX]) {
 		sapXepDongTangLeGiamChan(n, maTran[i]);
 	}
 }
+
+int kiemTraGiamDanDongCot(int m, int n, int maTran[][MAX]) {
+	for (int i = 0; i < m; i++) {
+		for (int j = 1; j < n; j++) {
+			if (maTran[i][j] > maTran[i][j - 1]) return 0;
+		}
+	}
+	for (int j = 0; j < n; j++) {
+		for (int i = 1; i < m; i++) {
+			if (maTran[i][j] > maTran[i - 1][j]) return 0;
+		}
+	}
+	return 1;
+}
+
 int main() {
 	int m, n, k = 100;
 	int maTran[MAX][MAX];
@@ -155,6 +170,14 @@ int main() {
 			sapXepMaTranDongTangLeGiamChan(m, n, maTran);
 			printf("Ma tran sau khi sap xep dong tang le, giam chan:\n");
 			xuatMaTran(m, n, maTran);
+			break;
+		case 7:
+			if (kiemTraGiamDanDongCot(m, n, maTran)) {
+				printf("Ma tran co gia tri giam dan theo dong va cot.\n");
+			}
+			else {
+				printf("Ma tran khong co gia tri giam dan theo dong va cot.\n");
+			}
 			break;
 		case 0:
 			printf("Thoat.\n");
