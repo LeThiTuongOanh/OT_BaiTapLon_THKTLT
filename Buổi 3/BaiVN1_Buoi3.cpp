@@ -146,6 +146,33 @@ void lietKeDongGiamDan(int m, int n, int maTran[][MAX]) {
 	}
 }
 
+void demChuSoXuatHienNhieuNhat(int m, int n, int maTran[][MAX]) {
+	int chuSoCount[10] = { 0 };
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			int num = maTran[i][j];
+			while (num > 0) {
+				int chuSo = num % 10;
+				chuSoCount[chuSo]++;
+				num /= 10;
+			}
+		}
+	}
+	int maxCount = 0;
+	for (int i = 0; i < 10; i++) {
+		if (chuSoCount[i] > maxCount) {
+			maxCount = chuSoCount[i];
+		}
+	}
+	printf("Cac chu so xuat hien nhieu nhat: ");
+	for (int i = 0; i < 10; i++) {
+		if (chuSoCount[i] == maxCount) {
+			printf("%d ", i);
+		}
+	}
+	printf("\n");
+}
+
 
 int main() {
 	int m, n, k = 100;
@@ -203,6 +230,9 @@ int main() {
 			break;
 		case 9:
 			lietKeDongGiamDan(m, n, maTran);
+			break;
+		case 11:
+			demChuSoXuatHienNhieuNhat(m, n, maTran);
 			break;
 		case 0:
 			printf("Thoat.\n");
