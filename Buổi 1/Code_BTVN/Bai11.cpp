@@ -61,6 +61,24 @@ void themPhanTuTaiViTri(int **a, int *n, int x, int k) {
 	(*n)++;
 }
 
+void chuyenChanLenDauLeXuongCuoi(int *a, int n) {
+	int chan[50], le[50];
+	int chanCount = 0, leCount = 0;
+	for (int i = 0; i < n; i++) {
+		if (a[i] % 2 == 0) {
+			chan[chanCount++] = a[i];
+		}
+		else {
+			le[leCount++] = a[i];
+		}
+	}
+	for (int i = 0; i < chanCount; i++) {
+		a[i] = chan[i];
+	}
+	for (int i = 0; i < leCount; i++) {
+		a[chanCount + i] = le[i];
+	}
+}
 
 int main() {
 	int *a, n = 0;	
@@ -82,6 +100,12 @@ int main() {
 	printf("\nThem phan tu %d tai vi tri %d:\n", x, k);
 	themPhanTuTaiViTri(&a, &n, x, k);
 	xuatM1C_SoNguyen(a, n);
+
+
+	printf("\nChuyen so chan len dau, le xuong cuoi:\n");
+	chuyenChanLenDauLeXuongCuoi(a, n);
+	xuatM1C_SoNguyen(a, n);
+
 
 	free(a);
 	getchar();
