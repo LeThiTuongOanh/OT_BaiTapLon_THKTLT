@@ -173,6 +173,14 @@ void demChuSoXuatHienNhieuNhat(int m, int n, int maTran[][MAX]) {
 	printf("\n");
 }
 
+void hoanViHaiCot(int m, int n, int maTran[][MAX], int cot1, int cot2) {
+	for (int i = 0; i < m; i++) {
+		int temp = maTran[i][cot1];
+		maTran[i][cot1] = maTran[i][cot2];
+		maTran[i][cot2] = temp;
+	}
+}
+
 
 int main() {
 	int m, n, k = 100;
@@ -233,6 +241,16 @@ int main() {
 			break;
 		case 11:
 			demChuSoXuatHienNhieuNhat(m, n, maTran);
+			break;
+		case 13:
+			int cot1, cot2;
+			printf("Nhap cot thu nhat (bat dau tu 0): ");
+			scanf_s("%d", &cot1);
+			printf("Nhap cot thu hai (bat dau tu 0): ");
+			scanf_s("%d", &cot2);
+			hoanViHaiCot(m, n, maTran, cot1, cot2);
+			printf("Ma tran sau khi hoan vi hai cot:\n");
+			xuatMaTran(m, n, maTran);
 			break;
 		case 0:
 			printf("Thoat.\n");
