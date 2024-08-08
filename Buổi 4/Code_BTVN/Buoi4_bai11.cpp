@@ -20,6 +20,18 @@ int timFibonacciMaxNhoHonN_DeQuy(int n) {
 	return previousFib;
 }
 
+// Hàm khử đệ quy tìm số Fibonacci lớn nhất nhưng nhỏ hơn n
+int timFibonacciMaxNhoHonN_KhuDeQuy(int n) {
+	int fib1 = 0, fib2 = 1;
+	int nextFib = fib1 + fib2;
+
+	while (nextFib < n) {
+		fib1 = fib2;
+		fib2 = nextFib;
+		nextFib = fib1 + fib2;
+	}
+	return fib2;
+}
 int main() {
 	int n;
 	printf("Nhap so nguyen duong n: ");
@@ -27,6 +39,11 @@ int main() {
 
 	int fibonacciMax_DeQuy = timFibonacciMaxNhoHonN_DeQuy(n);
 	printf("So Fibonacci lon nhat nho hon %d theo de quy la: %d\n", n, fibonacciMax_DeQuy);
+
+	int fibonacciMax_KhuDeQuy = timFibonacciMaxNhoHonN_KhuDeQuy(n);
+	printf("So Fibonacci lon nhat nho hon %d theo khu de quy la: %d\n", n, fibonacciMax_KhuDeQuy);
+
+
 	getchar();
 	getchar();
 	return 0;
